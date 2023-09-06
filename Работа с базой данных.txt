@@ -1,24 +1,22 @@
 1)
+SELECT cr.login, 
+COUNT(ord."courierId") AS "Количество заказов в доставке" 
+FROM "Couriers" AS cr 
+INNER JOIN "Orders" AS ord ON cr.id = ord."courierId" 
+WHERE "inDelivery" = true 
+GROUP BY ord."courierId", cr.login;
 
-SELECT c.login, COUNT* (o.id) AS deliveri_order
-FROM "Couriers" AS c
-JOIN "Orders" AS O ON c.id = o."courierId"
-WHERE o."inDelivery" = true
-GROUP BY c."login";
 
 
 
 2) 
-
-SELECT cancelled,
-finished,
-inDelivery 
-          CASE
-          WHEN finished = true THEN 2,
-          WHEN cancelled = true THEN -1,
-          WHEN inDelivery = ture THEN 1,
-          ELSE 0
-       END AS status
+SELECT track, 
+CASE
+WHEN finished = true THEN 2
+WHEN cancelled = true THEN -1
+WHEN "inDelivery" = true THEN 1 
+ELSE 0 
+END 
 FROM "Orders";
 
 
