@@ -1,6 +1,16 @@
 1)
+
+#первый вариант
+SELECT c.login,
+COUNT(o.id)
+from "Couriers" AS c
+LEFT JOIN "Orders" AS o ON c.id=o."courierId"
+WHERE o."inDelivery"=true
+GROUP BY c.login;
+
+#второй вариант
 SELECT cr.login, 
-COUNT(ord."courierId") AS "Количество заказов в доставке" 
+COUNT(ord."courierId") AS "Кол-во заказов в доставке" 
 FROM "Couriers" AS cr 
 INNER JOIN "Orders" AS ord ON cr.id = ord."courierId" 
 WHERE "inDelivery" = true 
@@ -8,8 +18,8 @@ GROUP BY ord."courierId", cr.login;
 
 
 
-
 2) 
+
 SELECT track, 
 CASE
 WHEN finished = true THEN 2
